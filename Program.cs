@@ -10,7 +10,6 @@ namespace Laboratorio_9
     {
         static void Main()
         {
-            //Parte 1
             var tienda = new TiendaDonLucas();
             bool continuar = true;
 
@@ -43,6 +42,7 @@ namespace Laboratorio_9
                         break;
                 }
             }
+            Console.ReadKey();
         }
     }
 
@@ -108,13 +108,13 @@ namespace Laboratorio_9
                 cajaPorRubro[rubro] += cantidad * precio;
 
                 Console.Clear();
-                Console.WriteLine("Se han ingresado " +cantidad +" unidades");
-                Console.WriteLine("Se han ingresado " + cantidad * precio +"en caja");
-                Console.WriteLine("=======================");
-                Console.WriteLine("1: Registrar más productos de " + rubro);
-                Console.WriteLine("2: <- Regresar");
-                Console.WriteLine("=======================");
-                Console.Write("Ingrese una opción: ");
+                Console.Write("Se han ingresado " +cantidad +" unidades" +
+                "\nSe han ingresado S/." + cantidad * precio +" en caja" +
+                "\n============================" +
+                "\n1: Registrar más productos de " + rubro +
+                "\n2: <- Regresar" +
+                "\n=======================" +
+                "\nIngrese una opción: ");
                 int seguir = int.Parse(Console.ReadLine());
 
                 if (seguir == 1)
@@ -127,27 +127,26 @@ namespace Laboratorio_9
         public void RegistrarDevolucion()
         {
             Console.Clear();
-            Console.WriteLine("=======================");
-            Console.WriteLine("Registrar Devolución de:");
-            Console.WriteLine("=======================");
-            Console.WriteLine("1: Limpieza");
-            Console.WriteLine("2: Abarrotes");
-            Console.WriteLine("3: Golosinas");
-            Console.WriteLine("4: Electrónicos");
-            Console.WriteLine("5: <- Regresar");
-            Console.WriteLine("=======================");
-            Console.Write("Ingrese una opción: ");
+            Console.Write("================================" +
+                    "\nRegistrar devolución de:" +
+                    "\n================================" +
+                    "\n1: Limpieza" +
+                    "\n2: Abarrotes" +
+                    "\n3: Golosinas" +
+                    "\n4: Electrónicos" +
+                    "\n5: <- Regresar" +
+                    "\n================================" +
+                    "\nIngrese una opción: ");
             int opcion = int.Parse(Console.ReadLine());
 
-            //Parte 4 
             if (opcion >= 1 && opcion <= 4)
             {
                 string rubro = GetRubro(opcion);
                 Console.Clear();
-                Console.WriteLine("=======================");
-                Console.WriteLine("Registrar Devolución de "+ rubro);
-                Console.WriteLine("=======================");
-                Console.Write("Ingrese cantidad (Unidades): ");
+                Console.WriteLine("======================="+
+                "\nRegistrar Devolución de "+ rubro +
+                "\n================================" +
+                "\nIngrese cantidad (unidades): ");
                 int cantidad = int.Parse(Console.ReadLine());
                 Console.Write("Ingrese Precio: S/.");
                 double precio = double.Parse(Console.ReadLine());
@@ -157,13 +156,13 @@ namespace Laboratorio_9
                 cajaPorRubro[rubro] -= cantidad * precio;
 
                 Console.Clear();
-                Console.WriteLine("Se han regresado "+ cantidad + " unidades");
-                Console.WriteLine("Se han devuelto " + cantidad * precio + " de caja");
-                Console.WriteLine("=======================");
-                Console.WriteLine("1: Devolver más productos de " + rubro);
-                Console.WriteLine("2: <- Regresar");
-                Console.WriteLine("=======================");
-                Console.Write("Ingrese una opción: ");
+                Console.Write("Se han regresado "+ cantidad + " unidades" +
+                "\nSe han devuelto " + cantidad * precio + " de caja"+
+                "\n=======================" +
+                "\n1: Devolver más productos de " + rubro +
+                "\n2: <- Regresar" +
+                "\n=======================" +
+                "\nIngrese una opción: ");
                 int seguir = int.Parse(Console.ReadLine());
 
                 if (seguir == 1)
@@ -192,23 +191,24 @@ namespace Laboratorio_9
         public void CerrarCaja()
         {
             Console.Clear();
-            Console.WriteLine("=========================");
-            Console.WriteLine("Cerrando Caja");
-            Console.WriteLine("=========================");
-            Console.WriteLine("Totales");
-            Console.WriteLine("=========================");
+            Console.Write("========================="+
+            "\nCerrando Caja"+
+            "\n========================="+
+            "\nTotales" +
+            "\n========================="+
+            "\n");
 
             foreach (var rubro in productosVendidos.Keys)
             {
-                Console.WriteLine($" {rubro,-9} | {productosVendidos[rubro],-2} vendidos");
-                Console.WriteLine($" {"",-9} | {productosDevueltos[rubro],-2} devueltos");
-                Console.WriteLine($" {"",-9} | {inventario[rubro],-2}  en total");
-                Console.WriteLine($" {"",-9} | $/{cajaPorRubro[rubro],-2:f2} en caja");
-                Console.WriteLine("=========================");
+                Console.WriteLine($"             | {productosVendidos[rubro]} vendidos" +
+                                  $"\n{rubro,-12} | {productosDevueltos[rubro]} devueltos" +
+                                  $"\n             | {inventario[rubro]} en total" +
+                                  $"\n             | S/ {cajaPorRubro[rubro]:f2} en caja" +
+                                  "\n================================");
             }
 
             double totalCaja = cajaPorRubro.Values.Sum();
-            Console.WriteLine("Queda en caja $/" + totalCaja.ToString("C"));
+            Console.WriteLine("Queda en caja " + totalCaja.ToString("C"));
             Console.ReadLine();
         }
     }
